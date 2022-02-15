@@ -6,7 +6,7 @@ const useFetch = () => {
 
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState([])
-  console.log(data);
+  //console.log(data);
 
   const fetchUsers = async () => {
     const res = await fetch(url)
@@ -16,7 +16,7 @@ const useFetch = () => {
     const numberOfPages = Math.ceil(data.length/cardsPerPage)
     const newData = Array.from({length: numberOfPages}, (_, index)=>{
         const start = index * cardsPerPage
-        console.log(start);
+        //console.log(start);
         return data.slice(start, start + cardsPerPage)
     })
 
