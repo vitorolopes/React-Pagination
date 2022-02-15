@@ -6,7 +6,7 @@ import useFetch from './useFetch';
 function App() {
 
   const {loading, data} = useFetch()
-
+  console.log(data);
   return (
     <main>
 
@@ -17,9 +17,19 @@ function App() {
 
       <section className="followers">
         <div className="container">
-          {data.map((follower)=>{
+          {data[0].map((follower)=>{
             return <Follower key={follower.id} {...follower}/>
           })}
+        </div>
+
+        <div className="btn-container">
+          <button className='prev-btn'>Prev</button>
+          {data.map((follower, index)=>{
+            return(
+              <button className="page-btn" key={index}>{index +1 }</button>
+            )
+          })}
+          <button className='next-btn'>Next</button>
         </div>
       </section>
 
@@ -29,22 +39,3 @@ function App() {
 }
 
 export default App;
-
-
-// Github API
-// 100 users
-// 10 users per page
-
-// Routes? None
-// Components
-//    App.js
-//    Follower.js
-// context.js? No
-// state values. Which and where.
-//    loading
-//    data
-//    number of users/page || number of pages
-//    page
-
-
-// App.js (fetch data, map) --> Follower.js

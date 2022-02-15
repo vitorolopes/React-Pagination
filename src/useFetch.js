@@ -4,17 +4,26 @@ const url = 'https://api.github.com/users/john-smilga/followers?per_page=100';
 
 const useFetch = () => {
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [data, setData] = useState([])
+  console.log(data);
 
   const fetchUsers = async () => {
-    setLoading(true)
     const res = await fetch(url)
-    const data = await res.json()
-    console.log(data);
-    setData(data)
+    const data = await res.json()  
+//! HERE Transform data array into an array of arrays
+    const cardsPerPage = 10
+    const numberOfPages = Math.ceil(data.length/cardsPerPage)
+    const newData = Array.from({length: numberOfPages}, (_, index)=>{
+        const start = index * cardsPerPage
+        console.log(start);
+        return data.slice(start, start + cardsPerPage)
+    })
+
+    setData(newData)
     setLoading(false)
   }
+
 
   useEffect(() => {
     fetchUsers()
@@ -26,3 +35,4 @@ const useFetch = () => {
 }
 
 export default useFetch
+
