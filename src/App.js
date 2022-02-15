@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Follower from './Follower';
+import useFetch from './useFetch';
+
 
 function App() {
+
+  const {loading, data} = useFetch()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+
+      <div className="section-title">
+        <h1 >{loading ? "loading" : "pagination"}</h1>
+        <div className="underline"></div>
+      </div>
+
+      <section className="followers">
+        <div className="container">
+          {data.map((follower)=>{
+            return <Follower key={follower.id} {...follower}/>
+          })}
+        </div>
+      </section>
+
+    </main>
+    
   );
 }
 
 export default App;
+
+
+// Github API
+// 100 users
+// 10 users per page
+
+// Routes? None
+// Components
+//    App.js
+//    Follower.js
+// context.js? No
+// state values. Which and where.
+//    loading
+//    data
+//    number of users/page || number of pages
+//    page
+
+
+// App.js (fetch data, map) --> Follower.js
